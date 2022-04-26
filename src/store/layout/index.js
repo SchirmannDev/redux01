@@ -1,26 +1,19 @@
+import { createAction, createReducer } from "@reduxjs/toolkit";
 const INITIAL_STATE = {
   showMessage: false,
 };
 
-export default (state = INITIAL_STATE, action) => {
-  switch (action.type) {
-    case "SHOW_MESSAGE":
-      return { ...state, showMessage: true };
-    case "HIDE_MESSAGE":
-      return { ...state, showMessage: false };
-    default:
-      return state;
-  }
-};
+export const showMessage = createAction("SHOW_MESSAGE");
+export const hideMessage = createAction("HIDE_MESSAGE");
 
-export const showMessage = () => {
-  return {
-    type: "SHOW_MESSAGE",
-  };
-};
+export default createReducer(INITIAL_STATE, {
+  [showMessage.type]: (state) => ({
+    ...state,
+    showMessage: true,
+  }),
 
-export const hideMessage = () => {
-  return {
-    type: "HIDE_MESSAGE",
-  };
-};
+  [hideMessage.type]: (state) => ({
+    ...state,
+    showMessage: false,
+  }),
+});
